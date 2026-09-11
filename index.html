@@ -1,551 +1,873 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Premium Portfolio</title>
+```
+<title>My Portfolio</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
+<style>
+
+    /* =========================
+       BASIC RESET
+    ========================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #07111f;
+        color: white;
+        overflow-x: hidden;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    body::before {
+        content: "";
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        background: #00d9ff;
+        filter: blur(180px);
+        opacity: 0.12;
+        top: -150px;
+        left: -150px;
+        z-index: -1;
+    }
+
+    body::after {
+        content: "";
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        background: #7b2cff;
+        filter: blur(180px);
+        opacity: 0.12;
+        right: -150px;
+        bottom: -150px;
+        z-index: -1;
+    }
+
+    /* =========================
+       NAVIGATION BAR
+    ========================= */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        padding: 20px 8%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: rgba(7, 17, 31, 0.75);
+        backdrop-filter: blur(18px);
+
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+
+        z-index: 1000;
+    }
+
+    .logo {
+        font-size: 27px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .logo span {
+        color: #00d9ff;
+    }
+
+    nav {
+        display: flex;
+        gap: 32px;
+    }
+
+    nav a {
+        position: relative;
+
+        color: #ffffff;
+        text-decoration: none;
+
+        font-size: 16px;
+        font-weight: 500;
+
+        transition: 0.3s;
+    }
+
+    nav a::after {
+        content: "";
+
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+
+        width: 0;
+        height: 2px;
+
+        background: #00d9ff;
+
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        color: #00d9ff;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    /* =========================
+       HOME SECTION
+    ========================= */
+
+    .home {
+        min-height: 100vh;
+
+        padding: 130px 8% 80px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 80px;
+    }
+
+    .home-content {
+        max-width: 650px;
+    }
+
+    .home-content h4 {
+        font-size: 20px;
+        color: #00d9ff;
+        margin-bottom: 15px;
+    }
+
+    .home-content h1 {
+        font-size: 64px;
+        line-height: 1.1;
+        margin-bottom: 20px;
+    }
+
+    .home-content h1 span {
+        color: #00d9ff;
+    }
+
+    .home-content h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #cbd5e1;
+    }
+
+    .home-content p {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #aebdce;
+    }
+
+    /* =========================
+       PROFILE IMAGE FRAME
+    ========================= */
+
+    .profile-container {
+        position: relative;
+
+        width: 360px;
+        height: 360px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-shrink: 0;
+    }
+
+    /* Outer rotating frame */
+
+    .profile-container::before {
+        content: "";
+
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+
+        border-radius: 50%;
+
+        border: 4px solid transparent;
+
+        border-top-color: #00d9ff;
+        border-right-color: #7b2cff;
+
+        animation: rotateFrame 5s linear infinite;
+    }
+
+    /* Glow frame */
+
+    .profile-container::after {
+        content: "";
+
+        position: absolute;
+
+        width: 310px;
+        height: 310px;
+
+        border-radius: 50%;
+
+        box-shadow:
+            0 0 30px rgba(0,217,255,0.4),
+            0 0 70px rgba(123,44,255,0.2);
+
+        z-index: -1;
+    }
+
+    .profile-img {
+        width: 275px;
+        height: 275px;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+        border: 7px solid #101c2e;
+
+        box-shadow:
+            0 0 20px rgba(0,217,255,0.25);
+
+        position: relative;
+        z-index: 2;
+
+        transition: 0.5s;
+    }
+
+    .profile-img:hover {
+        transform: scale(1.04);
+    }
+
+    @keyframes rotateFrame {
+
+        0% {
+            transform: rotate(0deg);
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #07111f, #102a43, #0b1d33);
-            color: white;
-            min-height: 100vh;
+        100% {
+            transform: rotate(360deg);
         }
 
-        /* NAVIGATION */
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .btn {
+        display: inline-block;
+
+        margin-top: 30px;
+
+        padding: 14px 30px;
+
+        border-radius: 30px;
+
+        background: linear-gradient(
+            90deg,
+            #00d9ff,
+            #7b2cff
+        );
+
+        color: white;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        box-shadow:
+            0 8px 25px rgba(0,217,255,0.15);
+
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+
+        box-shadow:
+            0 12px 35px rgba(0,217,255,0.3);
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+        min-height: 80vh;
+        padding: 110px 8%;
+    }
+
+    .section-title {
+        text-align: center;
+
+        font-size: 42px;
+
+        margin-bottom: 60px;
+    }
+
+    .section-title span {
+        color: #00d9ff;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .cards {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 25px;
+    }
+
+    .card {
+        padding: 35px;
+
+        background:
+            rgba(255,255,255,0.05);
+
+        border:
+            1px solid rgba(255,255,255,0.1);
+
+        border-radius: 20px;
+
+        backdrop-filter: blur(15px);
+
+        transition: 0.4s;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+
+        border-color: #00d9ff;
+
+        box-shadow:
+            0 15px 45px
+            rgba(0,217,255,0.12);
+    }
+
+    .card h3 {
+        font-size: 23px;
+
+        color: #00d9ff;
+
+        margin-bottom: 18px;
+    }
+
+    .card p {
+        color: #b6c2d1;
+
+        line-height: 1.7;
+
+        font-size: 16px;
+    }
+
+    /* =========================
+       SKILLS
+    ========================= */
+
+    .skill-card {
+        text-align: center;
+    }
+
+    .skill-card h3 {
+        margin-bottom: 12px;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .project-card {
+        min-height: 220px;
+    }
+
+    .project-card h3 {
+        font-size: 22px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+        text-align: center;
+    }
+
+    .contact p {
+        color: #b6c2d1;
+
+        font-size: 18px;
+
+        margin: 12px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        text-align: center;
+
+        padding: 25px;
+
+        background: #050c16;
+
+        border-top:
+            1px solid rgba(255,255,255,0.08);
+
+        color: #8996a8;
+    }
+
+    /* =========================
+       RESPONSIVE DESIGN
+    ========================= */
+
+    @media (max-width: 900px) {
+
+        header {
+            padding: 18px 5%;
+        }
+
         nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1000px;
-
-            padding: 18px 30px;
-
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-
-            z-index: 1000;
+            gap: 15px;
         }
 
         nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-
-            transition: 0.3s;
+            font-size: 14px;
         }
 
-        nav a:hover {
-            color: #4facfe;
-            transform: translateY(-2px);
-        }
-
-        /* MAIN CONTAINER */
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .home {
+            flex-direction: column-reverse;
 
             text-align: center;
 
-            animation: fadeIn 1.5s ease;
+            padding-top: 150px;
         }
 
-        .hero h1 {
-            font-size: 60px;
-            margin-bottom: 15px;
-
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            color: transparent;
+        .home-content {
+            max-width: 700px;
         }
 
-        .hero p {
-            font-size: 20px;
-            color: #c9d6e4;
-            margin-bottom: 30px;
+        .home-content h1 {
+            font-size: 48px;
         }
 
-        .hero button {
-            padding: 14px 30px;
-            border: none;
-            border-radius: 30px;
+        .profile-container {
+            width: 310px;
+            height: 310px;
+        }
 
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-            color: white;
+        .profile-img {
+            width: 235px;
+            height: 235px;
+        }
 
+        .cards {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 550px) {
+
+        header {
+            flex-direction: column;
+
+            gap: 15px;
+
+            padding: 15px 4%;
+        }
+
+        nav {
+            gap: 12px;
+        }
+
+        nav a {
+            font-size: 12px;
+        }
+
+        .home {
+            padding-top: 160px;
+        }
+
+        .home-content h1 {
+            font-size: 38px;
+        }
+
+        .home-content h2 {
+            font-size: 22px;
+        }
+
+        .home-content p {
             font-size: 16px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
-
-            transition: 0.3s;
         }
 
-        .hero button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.6);
+        .profile-container {
+            width: 260px;
+            height: 260px;
         }
 
-        /* SECTIONS */
+        .profile-img {
+            width: 200px;
+            height: 200px;
+        }
+
         section {
-            padding: 100px 0;
+            padding: 90px 5%;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 35px;
-            margin-bottom: 50px;
-
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            color: transparent;
+            font-size: 34px;
         }
 
-        /* PREMIUM FRAME */
-        .card {
-            padding: 35px;
+    }
 
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(15px);
+</style>
+```
 
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 25px;
-
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.3),
-                inset 0 0 20px rgba(255, 255, 255, 0.02);
-
-            transition: 0.4s;
-
-            animation: fadeUp 1s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-
-            border-color: rgba(0, 242, 254, 0.5);
-
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.4),
-                0 0 25px rgba(0, 242, 254, 0.15);
-        }
-
-        .card p {
-            color: #c9d6e4;
-            line-height: 1.8;
-            font-size: 17px;
-        }
-
-        /* SKILLS */
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .skill {
-            text-align: center;
-            padding: 30px;
-
-            background: rgba(255, 255, 255, 0.06);
-
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-
-            transition: 0.4s;
-        }
-
-        .skill:hover {
-            transform: translateY(-10px) scale(1.03);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .skill h3 {
-            margin-bottom: 10px;
-            color: #4facfe;
-        }
-
-        .skill p {
-            color: #b8c7d9;
-        }
-
-        /* PROJECTS */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .project {
-            padding: 30px;
-
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,0.1),
-                rgba(255,255,255,0.03)
-            );
-
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 22px;
-
-            transition: 0.4s;
-        }
-
-        .project:hover {
-            transform: translateY(-10px);
-            border-color: #4facfe;
-            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.15);
-        }
-
-        .project span {
-            font-size: 14px;
-            color: #00f2fe;
-        }
-
-        .project h3 {
-            margin: 15px 0;
-        }
-
-        .project p {
-            color: #b8c7d9;
-            line-height: 1.6;
-        }
-
-        /* CONTACT */
-        form {
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .input-box {
-            margin-bottom: 20px;
-        }
-
-        .input-box input,
-        .input-box textarea {
-            width: 100%;
-            padding: 15px;
-
-            background: rgba(255,255,255,0.07);
-
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 12px;
-
-            color: white;
-            outline: none;
-
-            font-size: 15px;
-        }
-
-        .input-box input:focus,
-        .input-box textarea:focus {
-            border-color: #4facfe;
-            box-shadow: 0 0 15px rgba(79,172,254,0.2);
-        }
-
-        textarea {
-            height: 130px;
-            resize: none;
-        }
-
-        form button {
-            width: 100%;
-            padding: 15px;
-
-            border: none;
-            border-radius: 12px;
-
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-
-            cursor: pointer;
-
-            transition: 0.3s;
-        }
-
-        form button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,242,254,0.3);
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 30px;
-
-            border-top: 1px solid rgba(255,255,255,0.1);
-
-            color: #8fa4b8;
-        }
-
-        /* FADE ANIMATIONS */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 800px) {
-
-            nav {
-                gap: 12px;
-                padding: 15px;
-            }
-
-            nav a {
-                font-size: 12px;
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .skills,
-            .projects {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+```
+<!-- =========================
+     NAVIGATION
+========================== -->
+
+<header>
+
+    <div class="logo">
+        My<span>Portfolio</span>
+    </div>
+
     <nav>
+
         <a href="#home">Home</a>
+
         <a href="#about">About</a>
+
         <a href="#skills">Skills</a>
+
         <a href="#projects">Projects</a>
+
         <a href="#contact">Contact</a>
+
     </nav>
 
+</header>
 
-    <!-- HERO -->
-    <div class="hero" id="home">
 
-        <h1>Hello, I'm a Developer</h1>
+<!-- =========================
+     HOME
+========================== -->
+
+<section class="home" id="home">
+
+    <div class="home-content">
+
+        <h4>Hello, I'm</h4>
+
+        <h1>
+            Your <span>Name</span>
+        </h1>
+
+        <h2>
+            Student | Developer | Programmer
+        </h2>
 
         <p>
-            Frontend Developer | Java | Python | Web Development
+            Welcome to my personal portfolio.
+            I am passionate about technology, programming,
+            web development and creating innovative digital solutions.
         </p>
 
-        <a href="#projects">
-            <button>View My Projects</button>
+        <a href="#about" class="btn">
+            Explore My Portfolio
         </a>
 
     </div>
 
 
-    <div class="container">
+    <!-- PROFILE IMAGE -->
 
-        <!-- ABOUT -->
-        <section id="about">
+    <div class="profile-container">
 
-            <h2 class="section-title">About Me</h2>
-
-            <div class="card">
-
-                <p>
-                    Hello! I'm a passionate developer interested in
-                    frontend development and software development.
-                    I enjoy creating modern websites and learning
-                    new technologies. My goal is to build useful,
-                    innovative and user-friendly applications.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- SKILLS -->
-        <section id="skills">
-
-            <h2 class="section-title">My Skills</h2>
-
-            <div class="skills">
-
-                <div class="skill">
-                    <h3>Java</h3>
-                    <p>Object-Oriented Programming</p>
-                </div>
-
-                <div class="skill">
-                    <h3>Python</h3>
-                    <p>Programming & Backend Development</p>
-                </div>
-
-                <div class="skill">
-                    <h3>HTML & CSS</h3>
-                    <p>Modern Web Development</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROJECTS -->
-        <section id="projects">
-
-            <h2 class="section-title">My Projects</h2>
-
-            <div class="projects">
-
-                <div class="project">
-
-                    <span>PROJECT 01</span>
-
-                    <h3>AI Resume Analyzer</h3>
-
-                    <p>
-                        An AI-based application that analyzes
-                        resumes and provides useful feedback
-                        for improving job applications.
-                    </p>
-
-                </div>
-
-
-                <div class="project">
-
-                    <span>PROJECT 02</span>
-
-                    <h3>LearnNova</h3>
-
-                    <p>
-                        A scholarship finder platform designed
-                        to help students discover scholarships
-                        and keep track of important deadlines.
-                    </p>
-
-                </div>
-
-
-                <div class="project">
-
-                    <span>PROJECT 03</span>
-
-                    <h3>Deal Hunt</h3>
-
-                    <p>
-                        A platform designed to help users discover
-                        useful deals and offers in one place.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTACT -->
-        <section id="contact">
-
-            <h2 class="section-title">Contact Me</h2>
-
-            <div class="card">
-
-                <form>
-
-                    <div class="input-box">
-                        <input
-                            type="text"
-                            placeholder="Your Name"
-                            required
-                        >
-                    </div>
-
-                    <div class="input-box">
-                        <input
-                            type="email"
-                            placeholder="Your Email"
-                            required
-                        >
-                    </div>
-
-                    <div class="input-box">
-                        <textarea
-                            placeholder="Your Message"
-                            required
-                        ></textarea>
-                    </div>
-
-                    <button type="submit">
-                        Send Message
-                    </button>
-
-                </form>
-
-            </div>
-
-        </section>
+        <img
+            src="image.jpg.jpeg"
+            alt="My Profile Image"
+            class="profile-img"
+        >
 
     </div>
 
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        © 2026 My Portfolio | All Rights Reserved
-    </footer>
+
+<!-- =========================
+     ABOUT
+========================== -->
+
+<section id="about">
+
+    <h2 class="section-title">
+        About <span>Me</span>
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>Who I Am</h3>
+
+            <p>
+                I am a passionate student interested in
+                technology, programming and software development.
+                I enjoy learning new technologies and building
+                useful applications.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>My Goal</h3>
+
+            <p>
+                My goal is to improve my technical skills,
+                solve real-world problems and develop
+                innovative projects that create value.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>My Interests</h3>
+
+            <p>
+                My interests include web development,
+                Python, Java, problem solving, UI/UX design
+                and exploring emerging technologies.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SKILLS
+========================== -->
+
+<section id="skills">
+
+    <h2 class="section-title">
+        My <span>Skills</span>
+    </h2>
+
+    <div class="cards">
+
+        <div class="card skill-card">
+
+            <h3>HTML & CSS</h3>
+
+            <p>
+                Creating modern, responsive and
+                user-friendly web interfaces.
+            </p>
+
+        </div>
+
+
+        <div class="card skill-card">
+
+            <h3>JavaScript</h3>
+
+            <p>
+                Developing interactive and dynamic
+                web applications.
+            </p>
+
+        </div>
+
+
+        <div class="card skill-card">
+
+            <h3>Python</h3>
+
+            <p>
+                Building programs, backend applications
+                and automation solutions.
+            </p>
+
+        </div>
+
+
+        <div class="card skill-card">
+
+            <h3>Java</h3>
+
+            <p>
+                Developing object-oriented applications
+                and solving programming problems.
+            </p>
+
+        </div>
+
+
+        <div class="card skill-card">
+
+            <h3>Git & GitHub</h3>
+
+            <p>
+                Managing source code and collaborating
+                with projects using Git and GitHub.
+            </p>
+
+        </div>
+
+
+        <div class="card skill-card">
+
+            <h3>UI / UX</h3>
+
+            <p>
+                Designing clean, modern and
+                user-friendly interfaces.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROJECTS
+========================== -->
+
+<section id="projects">
+
+    <h2 class="section-title">
+        My <span>Projects</span>
+    </h2>
+
+    <div class="cards">
+
+        <div class="card project-card">
+
+            <h3>Scholarship Management System</h3>
+
+            <p>
+                A platform designed to help students
+                discover scholarships and receive
+                deadline notifications.
+            </p>
+
+        </div>
+
+
+        <div class="card project-card">
+
+            <h3>Portfolio Website</h3>
+
+            <p>
+                A modern responsive portfolio website
+                created using HTML, CSS and JavaScript.
+            </p>
+
+        </div>
+
+
+        <div class="card project-card">
+
+            <h3>AI Resume Analyzer</h3>
+
+            <p>
+                An intelligent application concept for
+                analyzing resumes and providing useful
+                career-related insights.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================== -->
+
+<section id="contact" class="contact">
+
+    <h2 class="section-title">
+        Contact <span>Me</span>
+    </h2>
+
+    <p>
+        Have a project or opportunity?
+    </p>
+
+    <p>
+        Email: your@email.com
+    </p>
+
+    <p>
+        GitHub: Your GitHub Profile
+    </p>
+
+    <a
+        href="mailto:your@email.com"
+        class="btn"
+    >
+        Get In Touch
+    </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    © 2026 My Portfolio | All Rights Reserved
+
+</footer>
+```
 
 </body>
+
 </html>

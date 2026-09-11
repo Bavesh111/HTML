@@ -1,67 +1,373 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Portfolio</title>
+    <title>My Premium Portfolio</title>
 
     <style>
-        body {
-            background-color: lightblue;
-            color: darkblue;
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        h2 {
-            text-align: center;
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #07111f, #102a43, #0b1d33);
+            color: white;
+            min-height: 100vh;
         }
 
+        /* NAVIGATION */
         nav {
-            text-align: center;
-            margin: 20px 0;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+            z-index: 1000;
         }
 
         nav a {
-            color: darkblue;
+            color: white;
             text-decoration: none;
-            margin: 0 15px;
+            font-size: 15px;
             font-weight: bold;
+
+            transition: 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #4facfe;
+            transform: translateY(-2px);
         }
 
-        section {
-            background-color: white;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 700px;
-            border-radius: 10px;
+        /* MAIN CONTAINER */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
         }
 
-        input {
-            padding: 8px;
-            margin-left: 10px;
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            animation: fadeIn 1.5s ease;
         }
 
-        button {
-            padding: 8px 20px;
-            background-color: darkblue;
-            color: white;
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 15px;
+
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #c9d6e4;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            padding: 14px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
+
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+
+            transition: 0.3s;
+        }
+
+        .hero button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.6);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 35px;
+            margin-bottom: 50px;
+
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* PREMIUM FRAME */
+        .card {
+            padding: 35px;
+
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 25px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.02);
+
+            transition: 0.4s;
+
+            animation: fadeUp 1s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(0, 242, 254, 0.5);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.4),
+                0 0 25px rgba(0, 242, 254, 0.15);
+        }
+
+        .card p {
+            color: #c9d6e4;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        /* SKILLS */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .skill {
+            text-align: center;
+            padding: 30px;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+
+            transition: 0.4s;
+        }
+
+        .skill:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .skill h3 {
+            margin-bottom: 10px;
+            color: #4facfe;
+        }
+
+        .skill p {
+            color: #b8c7d9;
+        }
+
+        /* PROJECTS */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project {
+            padding: 30px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.1),
+                rgba(255,255,255,0.03)
+            );
+
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 22px;
+
+            transition: 0.4s;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            border-color: #4facfe;
+            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.15);
+        }
+
+        .project span {
+            font-size: 14px;
+            color: #00f2fe;
+        }
+
+        .project h3 {
+            margin: 15px 0;
+        }
+
+        .project p {
+            color: #b8c7d9;
+            line-height: 1.6;
+        }
+
+        /* CONTACT */
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box input,
+        .input-box textarea {
+            width: 100%;
+            padding: 15px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+
+            color: white;
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .input-box input:focus,
+        .input-box textarea:focus {
+            border-color: #4facfe;
+            box-shadow: 0 0 15px rgba(79,172,254,0.2);
+        }
+
+        textarea {
+            height: 130px;
+            resize: none;
+        }
+
+        form button {
+            width: 100%;
+            padding: 15px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,242,254,0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+
+            border-top: 1px solid rgba(255,255,255,0.1);
+
+            color: #8fa4b8;
+        }
+
+        /* FADE ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+
+            nav {
+                gap: 12px;
+                padding: 15px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .skills,
+            .projects {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>My Portfolio</h2>
-
+    <!-- NAVIGATION -->
     <nav>
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -70,60 +376,176 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <section id="home">
-        <h3>Home</h3>
+
+    <!-- HERO -->
+    <div class="hero" id="home">
+
+        <h1>Hello, I'm a Developer</h1>
+
         <p>
-            Hello! I'm a frontend developer learning to build
-            modern and responsive websites.
+            Frontend Developer | Java | Python | Web Development
         </p>
-    </section>
 
-    <section id="about">
-        <h3>About Me</h3>
-        <p>
-            I am interested in web development and enjoy learning
-            new technologies and creating useful applications.
-        </p>
-    </section>
+        <a href="#projects">
+            <button>View My Projects</button>
+        </a>
 
-    <section id="skills">
-        <h3>My Skills</h3>
+    </div>
 
-        <ol>
-            <li>Java</li>
-            <li>Python</li>
-            <li>HTML</li>
-            <li>CSS</li>
-        </ol>
-    </section>
 
-    <section id="projects">
-        <h3>My Projects</h3>
+    <div class="container">
 
-        <ul>
-            <li>AI Resume Analyzer</li>
-            <li>LearnNova - Scholarship Finder</li>
-            <li>Deal Hunt</li>
-        </ul>
-    </section>
+        <!-- ABOUT -->
+        <section id="about">
 
-    <section id="contact">
-        <h3>Contact Me</h3>
+            <h2 class="section-title">About Me</h2>
 
-        <form>
-            <p>
-                <label>Name:</label>
-                <input type="text" placeholder="Enter your name">
-            </p>
+            <div class="card">
 
-            <p>
-                <label>Email:</label>
-                <input type="email" placeholder="Enter your email">
-            </p>
+                <p>
+                    Hello! I'm a passionate developer interested in
+                    frontend development and software development.
+                    I enjoy creating modern websites and learning
+                    new technologies. My goal is to build useful,
+                    innovative and user-friendly applications.
+                </p>
 
-            <button type="submit">Submit</button>
-        </form>
-    </section>
+            </div>
+
+        </section>
+
+
+        <!-- SKILLS -->
+        <section id="skills">
+
+            <h2 class="section-title">My Skills</h2>
+
+            <div class="skills">
+
+                <div class="skill">
+                    <h3>Java</h3>
+                    <p>Object-Oriented Programming</p>
+                </div>
+
+                <div class="skill">
+                    <h3>Python</h3>
+                    <p>Programming & Backend Development</p>
+                </div>
+
+                <div class="skill">
+                    <h3>HTML & CSS</h3>
+                    <p>Modern Web Development</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+        <section id="projects">
+
+            <h2 class="section-title">My Projects</h2>
+
+            <div class="projects">
+
+                <div class="project">
+
+                    <span>PROJECT 01</span>
+
+                    <h3>AI Resume Analyzer</h3>
+
+                    <p>
+                        An AI-based application that analyzes
+                        resumes and provides useful feedback
+                        for improving job applications.
+                    </p>
+
+                </div>
+
+
+                <div class="project">
+
+                    <span>PROJECT 02</span>
+
+                    <h3>LearnNova</h3>
+
+                    <p>
+                        A scholarship finder platform designed
+                        to help students discover scholarships
+                        and keep track of important deadlines.
+                    </p>
+
+                </div>
+
+
+                <div class="project">
+
+                    <span>PROJECT 03</span>
+
+                    <h3>Deal Hunt</h3>
+
+                    <p>
+                        A platform designed to help users discover
+                        useful deals and offers in one place.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact">
+
+            <h2 class="section-title">Contact Me</h2>
+
+            <div class="card">
+
+                <form>
+
+                    <div class="input-box">
+                        <input
+                            type="text"
+                            placeholder="Your Name"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-box">
+                        <input
+                            type="email"
+                            placeholder="Your Email"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-box">
+                        <textarea
+                            placeholder="Your Message"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 My Portfolio | All Rights Reserved
+    </footer>
 
 </body>
 </html>
